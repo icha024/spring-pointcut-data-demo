@@ -29,8 +29,10 @@ public class PointCutMetric {
     public Object aroundController(ProceedingJoinPoint pjp, GetMapping getMapping) throws Throwable {
         log.info("Called AROUND controller - before");
         long startTime = System.currentTimeMillis();
-        Object retObj = pjp.proceed();
-        log.info("Called AROUND controller - after. Elapsed " + (System.currentTimeMillis() - startTime) + " ms.");
-        return retObj;
+        try {
+            return pjp.proceed();
+        } finally {
+            log.info("Called AROUND controller - after. Elapsed " + (System.currentTimeMillis() - startTime) + " ms.");
+        }
     }
 }

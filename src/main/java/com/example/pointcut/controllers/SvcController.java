@@ -21,4 +21,10 @@ public class SvcController {
         log.info("Reply to hello2");
         return "Hello2";
     }
+
+    @GetMapping(value = "/h3")
+    public String hello3() {
+        log.info("Reply to hello3");
+        throw new NullPointerException("something bad");
+    }
 }
