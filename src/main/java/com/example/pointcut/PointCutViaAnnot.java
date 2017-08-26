@@ -35,4 +35,16 @@ public class PointCutViaAnnot {
             log.info("Called AROUND controller - after. Elapsed " + (System.currentTimeMillis() - startTime) + " ms.");
         }
     }
+
+    @Around("@annotation(timer)")
+    public Object aroundAnnotation(ProceedingJoinPoint pjp, Timer timer) throws Throwable {
+        log.info("[TIMER] Called AROUND controller - before");
+        log.info("Timer value: {}", timer.value());
+        long startTime = System.currentTimeMillis();
+        try {
+            return pjp.proceed();
+        } finally {
+            log.info("[TIMER] Called AROUND controller - after. Elapsed {} ms.", System.currentTimeMillis() - startTime);
+        }
+    }
 }

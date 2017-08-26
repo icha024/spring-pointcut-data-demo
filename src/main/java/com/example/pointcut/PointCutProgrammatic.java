@@ -12,10 +12,11 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class PointCutProgrammatic {
 
+    // See: https://stackoverflow.com/questions/24785423/using-methodinterceptor-in-spring
     @Bean
     public Advisor myAdvisor() {
         AspectJExpressionPointcut pointcut = new AspectJExpressionPointcut();
-		pointcut.setExpression("execution(* com.example.pointcut..*.*(..)) && @annotation(org.springframework.web.bind.annotation.GetMapping)");
+        pointcut.setExpression("execution(* com.example.pointcut..*.*(..)) && @annotation(org.springframework.web.bind.annotation.GetMapping)");
         return new DefaultPointcutAdvisor(pointcut, (MethodInterceptor) methodInvocation -> {
             log.info("[PROGRAMMATIC] Called AROUND controller - before");
             long startTime = System.currentTimeMillis();
