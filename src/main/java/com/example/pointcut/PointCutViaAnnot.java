@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Aspect
 @Slf4j
 @Component
-public class PointCutMetric {
+public class PointCutViaAnnot {
 
     @Before("execution(* com.example.pointcut..*.*(..)) && args(..) && @annotation(getMapping)")
     public void beforeController(GetMapping getMapping) {
